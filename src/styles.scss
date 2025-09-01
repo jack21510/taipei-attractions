@@ -1,0 +1,51 @@
+@import './styles/variables';
+@import './styles/mixins';
+@import './styles/reset';
+@import './styles/layout';
+
+
+
+/* 基本排版與色彩 */
+:root {
+   color-scheme: light dark;
+  }
+
+
+body {
+  font-family: system-ui, -apple-system, "Noto Sans TC", Arial, sans-serif;
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+  }
+
+
+.container {
+  @include container;
+}
+
+
+.btn {
+  @include button;
+}
+
+
+.input {
+  @include input;
+}
+
+
+.card {
+  @include card;
+}
+
+
+.grid {
+  @include grid;
+}
+
+
+.badge {
+  @include badge;
+}

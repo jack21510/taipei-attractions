@@ -1,0 +1,39 @@
+@use './variables';
+
+.header {
+  background:white;
+  border-bottom:1px solid $gray-300;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.header__inner {
+  @include container;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:.75rem 0;
+}
+
+.nav {
+  display:flex;
+  gap:.5rem;
+  background:$gray-300;
+}
+
+.main {
+  @include container;
+  padding-block: 1rem 3rem;
+}
+
+.toolbar {
+  display:grid;
+  gap:.75rem;
+  grid-template-columns: 1fr;
+  margin-bottom:1rem;
+  @media (min-width: $bp-md){
+    grid-template-columns: 1fr 1fr auto;
+    align-items:end;
+  }
+}

@@ -1,0 +1,71 @@
+@mixin container {
+  width: min(1200px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+@mixin button {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.5rem .9rem;
+  border:1px solid $gray-300;
+  border-radius:8px;
+  background:white; cursor:pointer;
+  transition: .2s;
+
+  &:hover {
+    box-shadow: $shadow;
+  }
+
+  &--primary {
+    background:$primary;
+    color:white;
+  }
+
+  &--danger  {
+    background:$danger;
+    color:white;
+  }
+
+  &--ghost {
+    background:transparent;
+  }
+}
+
+@mixin input {
+  display:block;
+  width:100%;
+  border:1px solid
+  $gray-300;
+  border-radius:8px;
+  padding:.55rem .75rem;
+  background:white;
+}
+
+@mixin card {
+  background:white;
+  border:1px solid $gray-300;
+  border-radius:12px;
+  box-shadow:$shadow;
+  padding:1rem;
+}
+
+@mixin grid {
+  display:grid;
+  gap:1rem;
+  grid-template-columns: repeat(1, minmax(0,1fr));
+  @media (min-width: $bp-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@mixin badge {
+  display:inline-block;
+  padding:.15rem .5rem;
+  border-radius:999px;
+  font-size:.75rem;
+  background:$gray-100;
+  color:$gray-700;
+}
