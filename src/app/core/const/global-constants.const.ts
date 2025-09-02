@@ -7,13 +7,10 @@ export const enum COMMON {
 
 export const enum API {
   // 語系
-  LANG = '',
+  LANG = 'zh-tw',
   //API
   GET_ATTRACTIONS_ALL = 'Attractions/All',
   GET_MISCELLANEOUS_CATEGORIES = 'Miscellaneous/Categories',
-
-
-
 
 }
 

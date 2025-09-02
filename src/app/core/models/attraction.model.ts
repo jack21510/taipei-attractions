@@ -1,3 +1,15 @@
+export class GetAttractionAll {
+  /** 分類 */
+  categoryIds!: string;
+  /** 分頁 */
+  page!: number;
+
+  constructor(data?: GetAttractionAll) {
+      this.categoryIds = data?.categoryIds || '';
+      this.page = data?.page || 0;
+  }
+}
+
 export class Attraction {
   id!: number;
   name!: string;
@@ -76,3 +88,7 @@ export class Category {
 }
 
 
+export interface PageResp<T> {
+  total: number;
+  data: T[];
+}

@@ -60,8 +60,8 @@ export class RequestService {
       return this.closeAllAPI() as unknown as Observable<Response>;
     } else {
       const httpHeaders = this.getHTTPHeaders();
-      const url = environment.API_DEFAULT_IP + api;
-
+      const url = environment.API_DEFAULT_IP + API.LANG + '/' + api;
+      console.log(url);
       switch (method) {
         case HTTP_METHOD.GET:
           return this.http
@@ -164,8 +164,7 @@ export class RequestService {
   private getHTTPHeaders(): HttpHeaders {
     const result = new HttpHeaders({
       Accept: 'application/json',
-      'Content-Type': 'application/json',
-      // TODO: 沒有token所以暫塞帳號
+      // 'Content-Type': 'application/json',
       // Authorization:  'Bearer ' + sessionStorage.getItem(COMMON.TOKEN) ?? '',
     });
     return result;
@@ -175,7 +174,6 @@ export class RequestService {
     const result = new HttpHeaders({
       Accept: '*/*',
       'Content-Type': 'application/json',
-      // TODO: 沒有token所以暫塞帳號
       // Authorization: 'Bearer ' + sessionStorage.getItem(COMMON.ACCOUNT_ID),
     });
     return result;
