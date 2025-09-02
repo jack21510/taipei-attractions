@@ -1,0 +1,17 @@
+/* 你原本的 toolbar 若有保留 */
+.toolbar {
+  display: grid;
+  gap: .75rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .toolbar { grid-template-columns: 1fr 1fr auto; align-items: end; }
+}
+.toolbar__actions { display: flex; gap: .5rem; align-items: center; }
+
+
+.favorite {
+  gap: .75rem;
+  margin-bottom: 1rem;
+}

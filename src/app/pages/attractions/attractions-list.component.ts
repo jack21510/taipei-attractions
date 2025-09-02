@@ -1,21 +1,105 @@
 import { Component, OnInit } from '@angular/core';
 import { AttractionsService } from '../../core/services/attractions.service';
-import { GetAttractionAll } from '../../core/models/attraction.model';
+import { Attraction, Category, GetAttractionAll } from '../../core/models/attraction.model';
+import { Response as ApiResponse} from '../../core/models/response.model'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PaginationComponent } from "../../shared/components/pagination/pagination.component";
+import { AsyncPipe, NgIf, NgFor } from '@angular/common';
+import { CardComponent } from '../../shared/components/card/card.component';
 
 @Component({
   selector: 'app-attractions-list',
   templateUrl: './attractions-list.component.html',
-  styleUrls: ['./attractions-list.component.scss']
+  styleUrls: ['./attractions-list.component.scss'],
+  imports: [PaginationComponent, NgIf, NgFor, CardComponent]
 })
 export class AttractionsListComponent implements OnInit {
 
+  page = 1;
+  readonly size = 30;
+  total = 0;
+  loading = false;
+  validateForm!: FormGroup;
+
+  categories: Category[] = [
+    {
+      id:12,
+      name:'測試'
+    }
+  ];
+  data: Attraction[] = [];
+  selectedIds = new Set<number>();
+
+
   constructor(
     private attractionsService: AttractionsService,
+    private fb: FormBuilder,
+
   ) { }
 
   ngOnInit() {
+    this.initForm();
     this.getAttraction();
   }
+
+  private initForm() {
+    this.validateForm = this.fb.group({
+      category: [],
+    });
+  }
+
+  onSearchClick() {
+
+    this.setValidate();
+    if (this.validateForm.valid) {
+      const category = this.validateForm.get('category')?.value;
+    }
+    else{
+      this.getAttraction();
+    }
+  }
+
+  setValidate() {
+    const category = this.validateForm.get('category')?.value ?? '';
+
+    if (category == '') {
+      this.validateForm.get('category')?.addValidators([Validators.required]);
+
+      return;
+    }
+    else {
+      this.validateForm.get('category')?.clearValidators();
+      this.validateForm.get('category')?.updateValueAndValidity();
+    }
+
+  }
+
+  onToggle(id: number, checked: boolean) {
+    if (checked) this.selectedIds.add(id);
+    else this.selectedIds.delete(id);
+  }
+
+  addToFavorites() {
+    const added = this.data.filter(x => this.selectedIds.has(x.id)).map(x => ({ ...x }));
+    this.selectedIds.clear();
+    alert(`已加入我的最愛：${added.length} 筆`);
+  }
+
+  // ---- 分頁 ----
+  onPageChange(p: number): void {
+    const last = Math.max(1, Math.ceil(this.total / this.size));
+    const clamped = Math.max(1, Math.min(p, last));
+    if (clamped === this.page) return;
+    this.page = clamped;
+    this.onSearchClick();
+  }
+
+  // ---- 勾選 / 收藏 ----
+  toggleSelect(id: number, checked: boolean): void {
+    checked ? this.selectedIds.add(id) : this.selectedIds.delete(id);
+  }
+
+
 
   getAttraction () {
     const getAttractionAll = new GetAttractionAll;
@@ -24,7 +108,8 @@ export class AttractionsListComponent implements OnInit {
     this.attractionsService.getAttractions(getAttractionAll).subscribe((res) => {
           if (res) {
             console.log(res);
-
+            const mainData = res as ApiResponse;
+            this.data = mainData.data as Attraction[];
           }
         });
   }

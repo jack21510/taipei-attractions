@@ -1,3 +1,42 @@
-<p>
-  attractions-list works!
-</p>
+<section class="toolbar card">
+  <label>
+    <div>分類</div>
+    <select class="input" type="" formControlName="category">
+      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+  </label>
+
+
+</section>
+
+<!-- 載入中 -->
+<div class="card" *ngIf="loading">載入中…</div>
+
+<div class="favorite">
+  <button class="btn btn--primary" (click)="addToFavorites()" [disabled]="selectedIds.size===0">
+    加入我的最愛（{{ selectedIds.size }}）
+  </button>
+</div>
+
+<!-- 清單 -->
+<section class="grid" *ngIf="!loading && data?.length; else emptyTpl">
+  <app-card
+    *ngFor="let item of data"
+    [item]="item"
+    [selected]="selectedIds.has(item.id)"
+    (toggle)="onToggle(item.id, $event)"
+  >
+  </app-card>
+</section>
+
+
+<ng-template #emptyTpl>
+  <div class="card">查無資料。</div>
+</ng-template>
+
+<app-pagination
+  [page]="page"
+  [size]="size"
+  [total]="total"
+  (pageChange)="onPageChange($event)">
+</app-pagination>

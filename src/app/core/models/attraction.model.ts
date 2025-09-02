@@ -34,7 +34,7 @@ export class Attraction {
   modified!: string;
   url!: string;
   category?: Category[];
-  images?: ImageFile[];
+  images!: ImageFile[];
 
   constructor(data?: Attraction) {
     this.id = data?.id || 0;
