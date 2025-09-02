@@ -1,0 +1,16 @@
+<!-- 背景 -->
+<div class="modal-backdrop" *ngIf="state?.open" (click)="onClose()"></div>
+
+<!-- 內容 -->
+<div class="modal" *ngIf="state?.open" role="dialog" aria-modal="true">
+  <div class="modal__header">
+    <h3>{{ state?.title }}</h3>
+    <button class="modal__close" (click)="onClose()">✕</button>
+  </div>
+  <div class="modal__body">
+    <p>{{ state?.message }}</p>
+  </div>
+  <div class="modal__footer">
+    <button class="btn btn--primary" (click)="onClose()">{{ state?.confirmText || '確定' }}</button>
+  </div>
+</div>

@@ -3,7 +3,7 @@ export const environment = {
   appVersion: require('package.json').version + '-prod',
   production: true,
   /** Prod */
-  API_DEFAULT_IP: 'https://www.travel.taipei/open-api',
-  PAGE_SIZE: 10,
+  API_DEFAULT_IP: 'https://www.travel.taipei/open-api/',
+  PAGE_SIZE: 30,
 
 };

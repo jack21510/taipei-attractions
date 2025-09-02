@@ -10,3 +10,5 @@
 <main class="main">
   <router-outlet></router-outlet>
 </main>
+
+<app-modal *ngIf="(modal.state$ | async) as st" [state]="st"></app-modal>
