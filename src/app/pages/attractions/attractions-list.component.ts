@@ -8,7 +8,7 @@ import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { ViewportScroller } from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
-import { BusyService } from '../../core/services/busy.service';
+import { LoadingService } from '../../core/services/loaging.service';
 
 @Component({
   selector: 'app-attractions-list',
@@ -21,7 +21,6 @@ export class AttractionsListComponent implements OnInit {
   page = 1;
   readonly size = 30;
   total = 0;
-  loading = false;
   validateForm!: FormGroup;
 
   categories: Category[] = [];
@@ -35,7 +34,7 @@ export class AttractionsListComponent implements OnInit {
     private fb: FormBuilder,
     private viewport:ViewportScroller,
     private fav: FavoritesService,
-    private busyService: BusyService,
+    private loadingService: LoadingService,
 
   ) { }
 
@@ -113,19 +112,19 @@ export class AttractionsListComponent implements OnInit {
 
   // ---- 切分頁後滾動到list頂部 ----
   private scrollToList() {
-  this.viewport.scrollToAnchor('list'); // 可搭配 {anchorScrolling:'enabled'}
-}
+  this.viewport.scrollToAnchor('list');
+  }
 
 
 
   getAttraction (categoryIds: string, page :number) {
-    this.busyService.busy();
+    this.loadingService.busy();
     const getAttractionAll = new GetAttractionAll;
         getAttractionAll.categoryIds = categoryIds,
         getAttractionAll.page = page;
     this.attractionsService.getAttractions(getAttractionAll).subscribe((res) => {
           if (res) {
-             this.busyService.idle();
+             this.loadingService.idle();
             const mainData = res as ApiResponse;
             this.data = mainData.data as Attraction[];
             this.total = mainData.total ?? 0;
@@ -134,9 +133,10 @@ export class AttractionsListComponent implements OnInit {
   }
 
   getCategory () {
+    this.loadingService.busy();
     this.attractionsService.getAttractionsCategory().subscribe((res) => {
           if (res) {
-            console.log(res);
+            this.loadingService.idle();
             const mainData = res as ApiResponse;
             let categoryAll = new CategoryAll();
             categoryAll =  mainData.data as CategoryAll;

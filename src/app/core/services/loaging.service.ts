@@ -5,7 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 @Injectable({providedIn: 'root'})
 
 
-export class BusyService {
+export class LoadingService {
   busyRequestCount = 0;
 
   constructor(

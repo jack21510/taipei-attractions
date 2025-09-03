@@ -187,29 +187,12 @@ export class RequestService {
     return result;
   }
 
-  /**
-   * for Status Code 200的情況 (response error) && backend throw exception
-   * SystemCode 值 "-1" 意思是 Api執行Method發生異常 (backend throw exception)
-   * SystemCode 值 "1" 意思是 呼叫Api成功
-   * @param response : MercueResponse
-   */
+
   private handleResponse = (response: Response): boolean => {
-    console.log(response);
+    // console.log(response);
     let hasResult = true;
 
     return hasResult;
-  };
-
-
-  private ocrHandleNoTokenUserError = (response: any): boolean => {
-    let responseSuccess = true;
-
-    // sso token 只回token沒有status
-    if (response.status !== 200 && !response.token) {
-      responseSuccess = false;
-    }
-
-    return responseSuccess;
   };
 
   private ISHandleResponse = (response: Response): boolean => {

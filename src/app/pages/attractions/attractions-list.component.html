@@ -7,8 +7,6 @@
   </label>
 </form>
 
-<!-- 載入中 -->
-<div class="card" *ngIf="loading">載入中…</div>
 
 <div class="favorite">
   <button class="btn btn--primary" (click)="addToFavorites()" [disabled]="selectedIds.size===0">
@@ -17,7 +15,7 @@
 </div>
 
 <!-- 清單 -->
-<section id="list" class="grid" *ngIf="!loading && data?.length; else emptyTpl">
+<section id="list" class="grid" *ngIf="data?.length; else emptyTpl">
   <app-card
     *ngFor="let item of data"
     [item]="item"

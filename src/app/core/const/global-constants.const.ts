@@ -1,5 +1,5 @@
 export const enum COMMON {
-  // TOKEN = 'nanshan-token',
+  // TOKEN = 'token',
   ACCOUNT_ID = 'accountId',
 }
 

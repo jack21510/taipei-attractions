@@ -13,7 +13,7 @@ import { EditFavoriteModalComponent } from '../../shared/components/favorite-mod
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, PaginationComponent, CardComponent,EditFavoriteModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, PaginationComponent, CardComponent,EditFavoriteModalComponent],
 })
 export class FavoritesComponent implements OnInit {
 

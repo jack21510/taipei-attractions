@@ -30,9 +30,11 @@ export class MessageService {
   }
 
   /** 關所有（別名） */
-  dismissAll(): void { this.close(); }
+  dismissAll(): void {
+    this.close();
+  }
 
-  /** 開一個錯誤 Modal，回傳含 closed$ 的 ref 供外部訂閱 */
+  /** 開一個錯誤 Modal*/
   openError(message: string, title = '系統錯誤'): { closed$: Observable<void> } {
     const closed$ = new Subject<void>();
     this._state$.next({
@@ -46,5 +48,4 @@ export class MessageService {
     return { closed$: closed$.asObservable() };
   }
 
-  /** 可擴充一般訊息 / 確認框：openInfo / openConfirm... */
 }
