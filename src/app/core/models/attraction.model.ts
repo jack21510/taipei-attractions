@@ -87,6 +87,23 @@ export class Category {
   }
 }
 
+export class CategoryAll {
+  Category!: Category[];
+  Friendly!: Category[];
+  Services!: Category[];
+  Target!: Category[];
+
+
+  constructor(data?: CategoryAll) {
+    this.Category = data?.Category || [];
+    this.Friendly = data?.Friendly || [];
+    this.Services = data?.Services || [];
+    this.Target = data?.Target || [];
+
+  }
+}
+
+
 
 export interface PageResp<T> {
   total: number;

@@ -1,2 +1,15 @@
-:host { display:block; margin-top:1rem; }
-button[disabled] { opacity:.5; cursor:not-allowed; }
+:host {
+   display:block; margin-top:1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+}
+
+button[disabled] {
+  opacity:1;
+  cursor:not-allowed;
+}

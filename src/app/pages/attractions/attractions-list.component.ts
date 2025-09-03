@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AttractionsService } from '../../core/services/attractions.service';
-import { Attraction, Category, GetAttractionAll } from '../../core/models/attraction.model';
+import { Attraction, Category, CategoryAll, GetAttractionAll } from '../../core/models/attraction.model';
 import { Response as ApiResponse} from '../../core/models/response.model'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from "../../shared/components/pagination/pagination.component";
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { CardComponent } from '../../shared/components/card/card.component';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-attractions-list',
   templateUrl: './attractions-list.component.html',
   styleUrls: ['./attractions-list.component.scss'],
-  imports: [PaginationComponent, NgIf, NgFor, CardComponent]
+  imports: [PaginationComponent, NgIf, NgFor, CardComponent, ReactiveFormsModule]
 })
 export class AttractionsListComponent implements OnInit {
 
@@ -21,12 +22,7 @@ export class AttractionsListComponent implements OnInit {
   loading = false;
   validateForm!: FormGroup;
 
-  categories: Category[] = [
-    {
-      id:12,
-      name:'測試'
-    }
-  ];
+  categories: Category[] = [];
   data: Attraction[] = [];
   selectedIds = new Set<number>();
 
@@ -34,12 +30,13 @@ export class AttractionsListComponent implements OnInit {
   constructor(
     private attractionsService: AttractionsService,
     private fb: FormBuilder,
+    private viewport:ViewportScroller,
 
   ) { }
 
   ngOnInit() {
     this.initForm();
-    this.getAttraction();
+    this.getCategory();
   }
 
   private initForm() {
@@ -53,10 +50,11 @@ export class AttractionsListComponent implements OnInit {
     this.setValidate();
     if (this.validateForm.valid) {
       const category = this.validateForm.get('category')?.value;
+      this.page = 1;
+      this.getAttraction(category,this.page );
     }
-    else{
-      this.getAttraction();
-    }
+
+    return;
   }
 
   setValidate() {
@@ -91,7 +89,8 @@ export class AttractionsListComponent implements OnInit {
     const clamped = Math.max(1, Math.min(p, last));
     if (clamped === this.page) return;
     this.page = clamped;
-    this.onSearchClick();
+    const category = this.validateForm.get('category')?.value;
+    this.getAttraction(category,this.page);
   }
 
   // ---- 勾選 / 收藏 ----
@@ -99,17 +98,43 @@ export class AttractionsListComponent implements OnInit {
     checked ? this.selectedIds.add(id) : this.selectedIds.delete(id);
   }
 
+  // ---- 切分頁後滾動到list頂部 ----
+  private scrollToList() {
+  this.viewport.scrollToAnchor('list'); // 可搭配 {anchorScrolling:'enabled'}
+}
 
 
-  getAttraction () {
+
+  getAttraction (categoryIds: string, page :number) {
+    console.log(categoryIds);
     const getAttractionAll = new GetAttractionAll;
-        getAttractionAll.categoryIds = '12',
-        getAttractionAll.page = 1;
+        getAttractionAll.categoryIds = categoryIds,
+        getAttractionAll.page = page;
     this.attractionsService.getAttractions(getAttractionAll).subscribe((res) => {
           if (res) {
             console.log(res);
             const mainData = res as ApiResponse;
             this.data = mainData.data as Attraction[];
+            this.total = mainData.total ?? 0;
+          }
+        });
+  }
+
+  getCategory () {
+    this.attractionsService.getAttractionsCategory().subscribe((res) => {
+          if (res) {
+            console.log(res);
+            const mainData = res as ApiResponse;
+            let categoryAll = new CategoryAll();
+            categoryAll =  mainData.data as CategoryAll;
+            this.categories = [
+              ...categoryAll.Category,
+              ...categoryAll.Friendly,
+              ...categoryAll.Services,
+              ...categoryAll.Target,
+            ];
+
+            setTimeout(() => this.scrollToList());
           }
         });
   }

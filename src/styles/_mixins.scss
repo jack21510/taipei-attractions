@@ -29,6 +29,10 @@
   &--ghost {
     background:transparent;
   }
+  &--gray {
+    background:$gray-700;
+    color:$gray-100;
+  }
 }
 
 @mixin input {

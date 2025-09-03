@@ -1,6 +1,6 @@
-<nav *ngIf="total > size" aria-label="pagination" class="flex gap-2 items-center">
+<nav aria-label="pagination" class="pagination flex gap-2 items-center">
   <button class="btn" (click)="pageChange.emit(page-1)" [disabled]="page<=1">上一頁</button>
-  <button class="btn btn--ghost" *ngFor="let p of pages"
+  <button class="btn btn--primary" *ngFor="let p of pages"
           [class.btn--primary]="p===page" (click)="pageChange.emit(p)">{{p}}</button>
   <button class="btn" (click)="pageChange.emit(page+1)"
           [disabled]="page>=Math.ceil(total/size)">下一頁</button>

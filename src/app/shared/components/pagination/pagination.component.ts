@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
-  imports: [NgIf, NgFor,]
+  imports: [NgFor]
 })
 export class PaginationComponent {
 
   @Input() page = 1;
-  @Input() size = 20;
+  @Input() size = 30;
   @Input() total = 0;
 
   @Output() pageChange = new EventEmitter<number>();

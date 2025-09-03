@@ -33,4 +33,17 @@ export class AttractionsService {
       })
     );
   }
+
+  /**
+   * 分類清單
+   */
+  getAttractionsCategory(): Observable<ResponseData | null> {
+    const requestBody = { type: API.TYPE_ATTRACTIONS };
+    return this.requestService.request(HTTP_METHOD.GET, requestBody,  API.GET_MISCELLANEOUS_CATEGORIES).pipe(
+      map((res: ApiResponse) => {
+        // mock api
+        return res;
+      })
+    );
+  }
 }

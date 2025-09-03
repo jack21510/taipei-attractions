@@ -12,6 +12,9 @@ export const enum API {
   GET_ATTRACTIONS_ALL = 'Attractions/All',
   GET_MISCELLANEOUS_CATEGORIES = 'Miscellaneous/Categories',
 
+
+  TYPE_ATTRACTIONS = 'Attractions',
+
 }
 
 // JSON file

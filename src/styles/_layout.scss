@@ -36,3 +36,46 @@
     align-items:end;
   }
 }
+
+.favorite-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // icon 與文字間距
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    display: none; // 隱藏原生樣式
+  }
+
+  .custom-checkbox {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  input[type='checkbox']:checked + .custom-checkbox {
+    background: $primary; // 勾選後底色
+    border-color: $primary;
+  }
+
+  input[type='checkbox']:checked + .custom-checkbox::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .label-text {
+    font-size: 14px;
+    color: #333;
+  }
+}

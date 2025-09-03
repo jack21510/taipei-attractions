@@ -1,13 +1,11 @@
-<section class="toolbar card">
+<form [formGroup]="validateForm" class="toolbar card">
   <label>
     <div>分類</div>
-    <select class="input" type="" formControlName="category">
+    <select class="input" formControlName="category" (change)="onSearchClick()">
       <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
     </select>
   </label>
-
-
-</section>
+</form>
 
 <!-- 載入中 -->
 <div class="card" *ngIf="loading">載入中…</div>
@@ -19,7 +17,7 @@
 </div>
 
 <!-- 清單 -->
-<section class="grid" *ngIf="!loading && data?.length; else emptyTpl">
+<section id="list" class="grid" *ngIf="!loading && data?.length; else emptyTpl">
   <app-card
     *ngFor="let item of data"
     [item]="item"
