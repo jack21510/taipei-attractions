@@ -27,9 +27,9 @@
   }
 
   @media (max-width: 767px) {
-    width: 100%;   /* 手機滿版 */
-    height: auto;  /* 高度自適應 */
-    aspect-ratio: 4 / 3; /* 如果你想保持比例 */
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
 }
 
