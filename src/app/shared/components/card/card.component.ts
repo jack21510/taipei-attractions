@@ -11,6 +11,9 @@ import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 export class CardComponent {
   @Input() item!: Attraction;
   @Input() selected = false;
+  @Input() isFav = false;
+  @Input() isEdit = false;
+
   @Output() toggle = new EventEmitter<boolean>();
 
   onToggleChange(event: Event) {

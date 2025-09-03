@@ -1,57 +1,60 @@
 <div class="card card__row">
-      <!-- 左側：圖片 + 分類 -->
-      <div class="media">
-        <ng-container *ngIf="item.images.length > 0; then thenTemplate; else elseTemplate"></ng-container>
-          <ng-template #thenTemplate>
-            <img
-              *ngIf="item.images.length > 0"
-              class="media__img"
-              [src]="item.images[0].src || 'assets/image/image_default.svg'"
-              [alt]="item.name || '圖片'"
-              width="200"
-              height="180"
-            />
-          </ng-template>
-          <ng-template #elseTemplate>
-            <img
-              class="media__img--placeholder"
-              [src]="'assets/image/image_default.svg'"
-              [alt]="'圖片'"
-              width="200"
-              height="180"
-            />
-          </ng-template>
+  <!-- 左側：圖片 -->
+  <div class="media">
+    <ng-container *ngIf="item.images.length > 0; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+      <img class="media__img"
+           [src]="item.images[0].src || 'assets/image/image_default.svg'"
+           [alt]="item.name || '圖片'"
+           width="220"
+           height="220" />
+    </ng-template>
+    <ng-template #elseTemplate>
+      <img class="media__img--placeholder"
+           [src]="'assets/image/image_default.svg'"
+           [alt]="'圖片'"
+           width="220"
+           height="220" />
+    </ng-template>
+  </div>
 
-
-        <label class="favorite-toggle">
-          <input
-            type="checkbox"
-            [checked]="selected"
-            (change)="onToggleChange($event)"
-          />
-          <span class="custom-checkbox"></span>
-          <span class="label-text">加至我的最愛</span>
-        </label>
-      </div>
-
-      <!-- 右側：標題/勾選、介紹(最多三行)、下方meta -->
-      <div class="content">
-        <div class="item__head">
-          <h3 class="item__title">{{ item.name }}</h3>
-
-        </div>
-        <div class="item__tags">
-          <span class="badge" *ngFor="let tag of item.category">{{ tag.name }}</span>
-        </div>
-
-        <p class="item__intro clamp-3">
-          {{ item.introduction || '（無介紹）' }}
-        </p>
-
-        <div class="item__meta">
-          <div>地址：{{ item.address || '-' }}</div>
-          <div>電話：{{ item.tel || '-' }}</div>
-          <!-- <div>開放時間：{{ item.open_time || '-' }}</div> -->
-        </div>
-      </div>
+  <!-- 右側：標題/介紹/分類/編輯/checkbox -->
+  <div class="content">
+    <div class="item__head">
+      <h3 class="item__title">{{ item.name }}</h3>
     </div>
+
+    <div class="item__tags">
+      <span class="badge" *ngFor="let tag of item.category">{{ tag.name }}</span>
+    </div>
+
+    <p class="item__intro clamp-3">
+      {{ item.introduction || '（無介紹）' }}
+    </p>
+
+    <div class="item__meta">
+      <div>地址：{{ item.address || '-' }}</div>
+      <div>電話：{{ item.tel || '-' }}</div>
+    </div>
+
+    <div class="edit">
+       <!-- 勾選我的最愛 -->
+      <label class="favorite-toggle">
+        <input
+          type="checkbox"
+          [checked]="selected"
+          (change)="onToggleChange($event)" />
+        <span class="custom-checkbox"></span>
+        <span class="label-text">{{ isEdit ? '移除我的最愛' : '加至我的最愛' }}</span>
+        <ng-container *ngIf="isFav">
+          <span class="star">★</span>
+        </ng-container>
+      </label>
+       <!-- 編輯 -->
+      <button class="btn btn--primary">編輯</button>
+    </div>
+
+
+
+  </div>
+</div>

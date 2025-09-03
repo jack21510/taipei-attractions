@@ -22,6 +22,7 @@
     *ngFor="let item of data"
     [item]="item"
     [selected]="selectedIds.has(item.id)"
+    [isFav]="isFav(item.id)"
     (toggle)="onToggle(item.id, $event)"
   >
   </app-card>

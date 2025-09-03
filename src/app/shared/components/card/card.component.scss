@@ -2,20 +2,32 @@
 
 .card__row {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 220px 1fr;
   gap: 12px;
   align-items: start;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr; /* 手機：只留一欄 */
+    grid-template-rows: auto;   /* 自動高度 */
+  }
 }
 
 .media__img {
-  width: 200px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   object-fit: cover;
   border-radius: 8px;
   display: block;
+
   &--placeholder {
     background-color: #e9e5e1;
     border-radius: 8px;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;   /* 手機滿版 */
+    height: auto;  /* 高度自適應 */
+    aspect-ratio: 4 / 3; /* 如果你想保持比例 */
   }
 }
 
@@ -31,10 +43,19 @@
   align-items: center;
   justify-content: space-between;
   gap: .5rem;
-}
-.item__title { margin: 0; }
 
-.item__intro { margin: .25rem 0 .5rem; }
+  @media (max-width: 767px) {
+    order: 2; /* 移到 tags、intro、meta 之後 */
+  }
+}
+
+.item__title {
+  margin: 0;
+}
+
+.item__intro {
+  margin: .25rem 0 .5rem;
+}
 
 .clamp-3 {
   display: -webkit-box;
@@ -50,5 +71,11 @@
   margin-top: .5rem;
 }
 
-
-
+.edit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}

@@ -52,6 +52,7 @@
     height: 15px;
     border: 1px solid #666;
     border-radius: 4px;
+    margin-top: 6px;
     display: inline-block;
     position: relative;
     transition: background 0.2s, border-color 0.2s;
@@ -77,5 +78,11 @@
   .label-text {
     font-size: 14px;
     color: #333;
+    margin-top: 6px;
+  }
+
+  .star {
+    color: rgb(239, 232, 118);
+    margin-top: 6px;
   }
 }

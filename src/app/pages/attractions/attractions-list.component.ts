@@ -7,6 +7,7 @@ import { PaginationComponent } from "../../shared/components/pagination/paginati
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { ViewportScroller } from '@angular/common';
+import { FavoritesService } from '../../core/services/favorites.service';
 
 @Component({
   selector: 'app-attractions-list',
@@ -31,6 +32,7 @@ export class AttractionsListComponent implements OnInit {
     private attractionsService: AttractionsService,
     private fb: FormBuilder,
     private viewport:ViewportScroller,
+    private fav: FavoritesService,
 
   ) { }
 
@@ -80,7 +82,15 @@ export class AttractionsListComponent implements OnInit {
   addToFavorites() {
     const added = this.data.filter(x => this.selectedIds.has(x.id)).map(x => ({ ...x }));
     this.selectedIds.clear();
+    this.fav.upsert(added);
     alert(`已加入我的最愛：${added.length} 筆`);
+
+    console.log(this.fav.list);
+
+  }
+
+  isFav(id: number) {
+    return this.fav.has(id);
   }
 
   // ---- 分頁 ----
