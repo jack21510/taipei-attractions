@@ -3,4 +3,9 @@
   <router-outlet></router-outlet>
 </main>
 
+<!-- 全域 Spinner -->
+<ngx-spinner type="ball-scale-multiple">
+  <p class="loading">loading....</p>
+</ngx-spinner>
+
 <app-modal *ngIf="(modal.state$ | async) as st" [state]="st"></app-modal>

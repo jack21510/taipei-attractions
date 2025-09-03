@@ -20,6 +20,8 @@
   display: block;
 
   &--placeholder {
+    width: 100%;
+    object-fit: contain;
     background-color: #e9e5e1;
     border-radius: 8px;
   }

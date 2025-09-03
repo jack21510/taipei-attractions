@@ -1,10 +1,18 @@
 import { Routes } from '@angular/router';
-import { AttractionsListComponent } from './pages/attractions/attractions-list.component';
-import { FavoritesComponent } from './pages/favorites/favorites.component';
-
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'attractions' },
-  { path: 'attractions', component: AttractionsListComponent },
-  { path: 'favorites', component: FavoritesComponent },
-  { path: '**', redirectTo: 'attractions' },
+  {
+    path: 'attractions',
+    loadComponent: () =>
+      import('./pages/attractions/attractions-list.component').then(
+        (m) => m.AttractionsListComponent
+      ),
+  },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('./pages/favorites/favorites.component').then(
+        (m) => m.FavoritesComponent
+      ),
+  },
+  { path: '', redirectTo: 'attractions', pathMatch: 'full' },
 ];

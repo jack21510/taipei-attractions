@@ -8,6 +8,7 @@ import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { ViewportScroller } from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
+import { BusyService } from '../../core/services/busy.service';
 
 @Component({
   selector: 'app-attractions-list',
@@ -28,11 +29,13 @@ export class AttractionsListComponent implements OnInit {
   selectedIds = new Set<number>();
 
 
+
   constructor(
     private attractionsService: AttractionsService,
     private fb: FormBuilder,
     private viewport:ViewportScroller,
     private fav: FavoritesService,
+    private busyService: BusyService,
 
   ) { }
 
@@ -116,13 +119,13 @@ export class AttractionsListComponent implements OnInit {
 
 
   getAttraction (categoryIds: string, page :number) {
-    console.log(categoryIds);
+    this.busyService.busy();
     const getAttractionAll = new GetAttractionAll;
         getAttractionAll.categoryIds = categoryIds,
         getAttractionAll.page = page;
     this.attractionsService.getAttractions(getAttractionAll).subscribe((res) => {
           if (res) {
-            console.log(res);
+             this.busyService.idle();
             const mainData = res as ApiResponse;
             this.data = mainData.data as Attraction[];
             this.total = mainData.total ?? 0;
