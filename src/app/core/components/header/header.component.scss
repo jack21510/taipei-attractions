@@ -1,0 +1,65 @@
+.header {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__inner {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+
+  a {
+    text-decoration: none;
+    color: #333;
+
+    &.headerActive {
+      font-size: 1rem;
+      font-weight: bold;
+      border-bottom: 2px solid #d49951;
+    }
+  }
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* RWD 切換 */
+.desktop {
+  display: none;
+}
+
+.mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .desktop {
+    display: flex;
+  }
+  .mobile {
+    display: none;
+  }
+}

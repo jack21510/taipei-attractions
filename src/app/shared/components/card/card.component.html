@@ -51,7 +51,7 @@
         </ng-container>
       </label>
        <!-- 編輯 -->
-      <button class="btn btn--primary">編輯</button>
+      <button *ngIf="isEdit" class="btn btn--primary" (click)="onToggleEdit($event)">編輯</button>
     </div>
 
 

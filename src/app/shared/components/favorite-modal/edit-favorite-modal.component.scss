@@ -1,0 +1,81 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  z-index: 100;
+  width: min(90%, 520px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.modal__body {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    gap: 0.25rem;
+  }
+
+  .input {
+    width: 100%;
+    box-sizing: border-box; // ✅ 讓 padding/邊框算在內部，不會超出
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  textarea.input {
+    min-height: 80px;
+    resize: vertical;
+  }
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.error {
+  color: #e5484d;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}

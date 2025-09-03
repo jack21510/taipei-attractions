@@ -1,7 +1,7 @@
 <form [formGroup]="validateForm" class="toolbar card">
   <label>
     <div>分類</div>
-    <select class="input" formControlName="category" (change)="onSearchClick()">
+    <select class="input" formControlName="category" aria-placeholder="請選擇" (change)="onSearchClick()">
       <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
     </select>
   </label>

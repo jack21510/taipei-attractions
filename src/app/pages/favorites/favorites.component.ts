@@ -7,12 +7,13 @@ import { FavoritesService } from '../../core/services/favorites.service';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { Attraction } from '../../core/models/attraction.model';
+import { EditFavoriteModalComponent } from '../../shared/components/favorite-modal/edit-favorite-modal.component';
 
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, PaginationComponent, CardComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, PaginationComponent, CardComponent,EditFavoriteModalComponent],
 })
 export class FavoritesComponent implements OnInit {
 
@@ -34,6 +35,9 @@ export class FavoritesComponent implements OnInit {
 
   loading = false;
   selectedIds = new Set<number>();
+
+  isModalOpen = false;
+  editingItem: any | null = null;
 
 
 
@@ -68,6 +72,23 @@ export class FavoritesComponent implements OnInit {
     this.fav.remove([...this.selectedIds]);
     this.reload();
 
+  }
+
+  //編輯相關
+  editItem(item: any) {
+    this.editingItem = item;
+    this.isModalOpen = true;
+  }
+
+  saveEdit(payload: { id: number; name: string; note: string; phone: string }) {
+    this.fav.updateOne(payload.id, payload);
+    this.reload();
+    this.isModalOpen = false;
+  }
+
+  cancelEdit() {
+    this.isModalOpen = false;
+    this.editingItem = null;
   }
 
 }

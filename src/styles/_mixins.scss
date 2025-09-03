@@ -73,3 +73,10 @@
   background:$gray-100;
   color:$gray-700;
 }
+
+@mixin headerActive {
+  display:inline-block;
+  font-size:.75rem;
+  background:$gray-100;
+  color:$gray-700;
+}

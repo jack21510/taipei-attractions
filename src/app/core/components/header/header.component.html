@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="header__inner">
+    <strong class="logo">台北旅遊景點</strong>
+
+    <!-- 桌機版導覽 -->
+    <nav class="nav desktop">
+      <a routerLink="/attractions" routerLinkActive="headerActive">景點列表</a>
+      <a routerLink="/favorites" routerLinkActive="headerActive">我的最愛</a>
+    </nav>
+
+    <!-- 手機版漢堡 -->
+    <button class="menu-btn mobile" (click)="toggleMenu()">☰</button>
+  </div>
+
+  <!-- 手機版展開選單 -->
+  <nav class="nav mobile" *ngIf="isMenuOpen">
+    <a routerLink="/attractions" routerLinkActive="headerActive" (click)="closeMenu()">景點列表</a>
+    <a routerLink="/favorites" routerLinkActive="headerActive" (click)="closeMenu()">我的最愛</a>
+  </nav>
+</header>

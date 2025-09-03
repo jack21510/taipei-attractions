@@ -11,6 +11,7 @@
     [selected]="selectedIds.has(item.id)"
     [isEdit]="true"
     (toggle)="toggleSelect(item.id, $event)"
+    (edit)="editItem($event)"
   >
   </app-card>
 </section>
@@ -26,3 +27,11 @@
   [total]="total"
   (pageChange)="applyPage($event)">
 </app-pagination>
+
+<!-- Modal -->
+<app-edit-favorite-modal
+  [isOpen]="isModalOpen"
+  [item]="editingItem"
+  (save)="saveEdit($event)"
+  (cancel)="cancelEdit()">
+</app-edit-favorite-modal>

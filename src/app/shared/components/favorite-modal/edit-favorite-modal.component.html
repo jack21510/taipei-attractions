@@ -1,0 +1,40 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="onCancel()"></div>
+
+<div class="modal" *ngIf="isOpen" role="dialog" aria-modal="true">
+  <div class="modal__header">
+    <h3>編輯我的最愛</h3>
+    <button type="button" class="modal__close" (click)="onCancel()">✕</button>
+  </div>
+
+  <form [formGroup]="validateForm" (ngSubmit)="onSave()">
+    <div class="modal__body">
+      <label>
+        名稱：
+        <input class="input" formControlName="name" />
+        <div class="error" *ngIf="showError('name')">{{ getErrorMessage('name') }}</div>
+      </label>
+
+      <label>
+        介紹：
+        <textarea class="input" formControlName="introduction"></textarea>
+      </label>
+
+      <label>
+        地址：
+        <input class="input" formControlName="address" />
+        <div class="error" *ngIf="showError('address')">{{ getErrorMessage('address') }}</div>
+      </label>
+
+      <label>
+        電話：
+        <input class="input" formControlName="tel" />
+        <div class="error" *ngIf="showError('tel')">{{ getErrorMessage('tel') }}</div>
+      </label>
+    </div>
+
+    <div class="modal__footer">
+      <button type="button" class="btn" (click)="onCancel()">取消</button>
+      <button type="submit" class="btn btn--primary">儲存</button>
+    </div>
+  </form>
+</div>

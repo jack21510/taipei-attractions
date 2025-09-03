@@ -15,9 +15,15 @@ export class CardComponent {
   @Input() isEdit = false;
 
   @Output() toggle = new EventEmitter<boolean>();
+  @Output() edit = new EventEmitter<Attraction>();
 
   onToggleChange(event: Event) {
     const checked = (event.target as HTMLInputElement).checked;
     this.toggle.emit(checked);
+  }
+
+  onToggleEdit(event: Event) {
+    event.stopPropagation();
+    this.edit.emit(this.item);
   }
 }
