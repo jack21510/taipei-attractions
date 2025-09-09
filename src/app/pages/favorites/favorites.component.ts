@@ -11,6 +11,7 @@ import { EditFavoriteModalComponent } from '../../shared/components/favorite-mod
 
 @Component({
   selector: 'app-favorites',
+  standalone: true,
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
   imports: [CommonModule, ReactiveFormsModule, PaginationComponent, CardComponent,EditFavoriteModalComponent],

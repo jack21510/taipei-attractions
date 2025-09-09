@@ -3,6 +3,7 @@ import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
+  standalone: true,
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
   imports: [NgFor]

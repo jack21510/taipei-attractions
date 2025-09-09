@@ -6,6 +6,7 @@ import { Attraction } from '../../../core/models/attraction.model';
 
 @Component({
   selector: 'app-edit-favorite-modal',
+  standalone: true,
   templateUrl: './edit-favorite-modal.component.html',
   styleUrls: ['./edit-favorite-modal.component.scss'],
   imports: [CommonModule, ReactiveFormsModule],

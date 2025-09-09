@@ -4,6 +4,7 @@ import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-card',
+  standalone: true,
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   imports: [ NgIf, NgFor]

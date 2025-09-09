@@ -5,6 +5,7 @@ import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   imports: [RouterLink, RouterLinkActive, NgIf],
