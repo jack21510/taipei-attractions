@@ -9,9 +9,11 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { ViewportScroller } from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
 import { LoadingService } from '../../core/services/loaging.service';
+import { MessageService } from '../../core/services/message.service';
 
 @Component({
   selector: 'app-attractions-list',
+  standalone: true,
   templateUrl: './attractions-list.component.html',
   styleUrls: ['./attractions-list.component.scss'],
   imports: [PaginationComponent, NgIf, NgFor, CardComponent, ReactiveFormsModule]
@@ -34,7 +36,7 @@ export class AttractionsListComponent implements OnInit {
     private fb: FormBuilder,
     private viewport:ViewportScroller,
     private fav: FavoritesService,
-    private loadingService: LoadingService,
+    private modal: MessageService,
 
   ) { }
 
@@ -85,8 +87,9 @@ export class AttractionsListComponent implements OnInit {
     const added = this.data.filter(x => this.selectedIds.has(x.id)).map(x => ({ ...x }));
     this.selectedIds.clear();
     this.fav.upsert(added);
-    alert(`已加入我的最愛：${added.length} 筆`);
+    // alert(`已加入我的最愛：${added.length} 筆`);
 
+    this.modal.openError(`已加入我的最愛：${added.length} 筆`,'加入成功').closed$.subscribe(() => {});
     console.log(this.fav.list);
 
   }
@@ -118,13 +121,11 @@ export class AttractionsListComponent implements OnInit {
 
 
   getAttraction (categoryIds: string, page :number) {
-    this.loadingService.busy();
     const getAttractionAll = new GetAttractionAll;
         getAttractionAll.categoryIds = categoryIds,
         getAttractionAll.page = page;
     this.attractionsService.getAttractions(getAttractionAll).subscribe((res) => {
           if (res) {
-             this.loadingService.idle();
             const mainData = res as ApiResponse;
             this.data = mainData.data as Attraction[];
             this.total = mainData.total ?? 0;
@@ -133,10 +134,8 @@ export class AttractionsListComponent implements OnInit {
   }
 
   getCategory () {
-    this.loadingService.busy();
     this.attractionsService.getAttractionsCategory().subscribe((res) => {
           if (res) {
-            this.loadingService.idle();
             const mainData = res as ApiResponse;
             let categoryAll = new CategoryAll();
             categoryAll =  mainData.data as CategoryAll;

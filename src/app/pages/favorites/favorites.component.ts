@@ -8,6 +8,7 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
 import { CardComponent } from '../../shared/components/card/card.component';
 import { Attraction } from '../../core/models/attraction.model';
 import { EditFavoriteModalComponent } from '../../shared/components/favorite-modal/edit-favorite-modal.component';
+import { MessageService } from '../../core/services/message.service';
 
 @Component({
   selector: 'app-favorites',
@@ -20,7 +21,8 @@ export class FavoritesComponent implements OnInit {
 
   constructor(
     private fav: FavoritesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modal: MessageService,
   ) { this.reload(); }
 
 
@@ -71,7 +73,9 @@ export class FavoritesComponent implements OnInit {
 
   deleteToFavorites() {
     this.fav.remove([...this.selectedIds]);
-    this.reload();
+    this.modal.openError(`已移除我的最愛：${[...this.selectedIds].length} 筆`,'移除成功').closed$.subscribe(() => {
+      this.reload();
+    });
 
   }
 

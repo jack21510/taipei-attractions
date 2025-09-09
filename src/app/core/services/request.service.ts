@@ -15,6 +15,7 @@ import { HTTP_METHOD } from '../const/http-method.const';
 import { ResponseCode } from '../enums/response-code.enum';
 import { Response } from '../models/response.model';
 import { MessageService } from '../../core/services/message.service';
+import { LoadingService } from './loaging.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +41,7 @@ export class RequestService {
     private http: HttpClient,
     private router: Router,
     private modal: MessageService,
+    private loadingService: LoadingService,
   ) { }
 
   fakeFile = (): Blob => {
@@ -56,6 +58,7 @@ export class RequestService {
    * @param api api url
    */
   request(method: string, requestParams: any, api: string): Observable<Response> {
+    this.loadingService.busy();
     if (this.isCloseAllApi) {
       return this.closeAllAPI() as unknown as Observable<Response>;
     } else {
@@ -191,6 +194,7 @@ export class RequestService {
   private handleResponse = (response: Response): boolean => {
     // console.log(response);
     let hasResult = true;
+    this.loadingService.idle();
 
     return hasResult;
   };
@@ -238,7 +242,7 @@ export class RequestService {
    */
   private handleError = (error: HttpErrorResponse) => {
     // console.log('handleError');
-
+    this.loadingService.idle();
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);

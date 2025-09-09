@@ -38,6 +38,10 @@ export class EditFavoriteModalComponent implements OnChanges {
   }
 
   onSave() {
+    if (this.validateForm.invalid) {
+      this.validateForm.markAllAsTouched();
+      return;
+    }
     if (this.validateForm.valid && this.item) {
       this.save.emit({ id: this.item.id, ...this.validateForm.value });
     }
@@ -51,9 +55,9 @@ export class EditFavoriteModalComponent implements OnChanges {
   private initForm() {
     this.validateForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(80)]],
-      introduction: [Validators.required, Validators.maxLength(300)],
-      address: [Validators.required, Validators.maxLength(80)],
-      tel: [Validators.required, [Validators.maxLength(50),Validators.pattern(/^[0-9+\- ]*$/) ]],
+      introduction: ['',[Validators.required, Validators.maxLength(500)]],
+      address: ['',[Validators.required, Validators.maxLength(80)]],
+      tel: ['', [Validators.required,Validators.maxLength(50),Validators.pattern(/^[0-9+\- ]*$/) ]],
     });
   }
 
@@ -72,6 +76,7 @@ export class EditFavoriteModalComponent implements OnChanges {
   /** 是否要顯示錯誤 */
   showError(field: string): boolean {
     const control = this.validateForm.get(field);
+
     return !!(control && control.invalid && (control.touched || control.dirty));
   }
 

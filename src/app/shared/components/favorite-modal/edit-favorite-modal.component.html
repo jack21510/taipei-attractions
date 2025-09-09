@@ -17,6 +17,9 @@
       <label>
         介紹：
         <textarea class="input" formControlName="introduction"></textarea>
+        <div class="error" *ngIf="showError('introduction')">
+          {{ getErrorMessage('introduction') }}
+        </div>
       </label>
 
       <label>
