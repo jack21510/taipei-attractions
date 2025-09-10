@@ -147,6 +147,8 @@ export class AttractionsListComponent implements OnInit {
               ...categoryAll.Target,
             ];
 
+            this.getAttraction('', this.page);
+
             setTimeout(() => this.scrollToList());
           }
         });

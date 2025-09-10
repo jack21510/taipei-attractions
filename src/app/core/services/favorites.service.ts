@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Attraction } from '../models/attraction.model';
 import { StorageUtil } from '../utils/storage.util';
 
-type Favorite = Attraction & { note?: string; phone?: string };
+type Favorite = Attraction;
 
 const LS_KEY = 'favorites_v1';
 
