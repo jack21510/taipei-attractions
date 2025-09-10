@@ -11,6 +11,10 @@ export enum ResponseCode {
      * 找不到資料
      */
     noContent = 204,
+    /**
+     * 沒權限查看
+     */
+    noToken = 401,
      /**
      * 沒權限查看
      */

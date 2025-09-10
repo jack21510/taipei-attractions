@@ -253,7 +253,7 @@ export class RequestService {
     }
     if (!this.isPopupInvalidMsg) {
       this.isPopupInvalidMsg = true;
-      if (error.status == 401) {
+      if (error.status == ResponseCode.noToken) {
         this.modal.openError('登入狀態已失效，請重新登入').closed$.subscribe(() => {
           this.isPopupInvalidMsg = false;
           sessionStorage.clear();
