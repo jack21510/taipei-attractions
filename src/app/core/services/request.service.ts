@@ -5,7 +5,6 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 import { environment } from '../../../environment/environment';
@@ -39,7 +38,6 @@ export class RequestService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
     private modal: MessageService,
     private loadingService: LoadingService,
   ) { }

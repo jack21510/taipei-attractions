@@ -10,6 +10,7 @@ import { ViewportScroller } from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
 import { LoadingService } from '../../core/services/loaging.service';
 import { MessageService } from '../../core/services/message.service';
+import { environment } from '../../../environment/environment';
 
 @Component({
   selector: 'app-attractions-list',
@@ -21,7 +22,7 @@ import { MessageService } from '../../core/services/message.service';
 export class AttractionsListComponent implements OnInit {
 
   page = 1;
-  readonly size = 30;
+  readonly size = environment.PAGE_SIZE;
   total = 0;
   validateForm!: FormGroup;
 
