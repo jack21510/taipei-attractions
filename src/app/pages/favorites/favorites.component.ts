@@ -73,7 +73,7 @@ export class FavoritesComponent implements OnInit {
 
   deleteToFavorites() {
     this.fav.remove([...this.selectedIds]);
-    this.modal.openError(`已移除我的最愛：${[...this.selectedIds].length} 筆`,'移除成功').closed$.subscribe(() => {
+    this.modal.openInfo(`已移除我的最愛：${[...this.selectedIds].length} 筆`,'移除成功').closed$.subscribe(() => {
       this.reload();
     });
 

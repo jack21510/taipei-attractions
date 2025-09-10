@@ -90,7 +90,7 @@ export class AttractionsListComponent implements OnInit {
     this.fav.upsert(added);
     // alert(`已加入我的最愛：${added.length} 筆`);
 
-    this.modal.openError(`已加入我的最愛：${added.length} 筆`,'加入成功').closed$.subscribe(() => {});
+    this.modal.openInfo(`已加入我的最愛：${added.length} 筆`,'加入成功').closed$.subscribe(() => {});
     console.log(this.fav.list);
 
   }

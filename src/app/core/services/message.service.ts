@@ -48,4 +48,32 @@ export class MessageService {
     return { closed$: closed$.asObservable() };
   }
 
+  /** 開一個info Modal*/
+  openInfo(message: string, title = '提示'): { closed$: Observable<void> } {
+    const closed$ = new Subject<void>();
+    this._state$.next({
+      open: true,
+      kind: 'info',
+      title,
+      message,
+      confirmText: '確定',
+      closed$
+    });
+    return { closed$: closed$.asObservable() };
+  }
+
+  /** 開一個confirm Modal*/
+  openConfirm(message: string, title = '提示'): { closed$: Observable<void> } {
+    const closed$ = new Subject<void>();
+    this._state$.next({
+      open: true,
+      kind: 'confirm',
+      title,
+      message,
+      confirmText: '確定',
+      closed$
+    });
+    return { closed$: closed$.asObservable() };
+  }
+
 }
